@@ -1,10 +1,4 @@
-# rubocop: disable Metrics/ModuleLength
-# rubocop: disable Metrics/MethodLength
-# rubocop: disable Style/For
-# rubocop: disable Metrics/BlockNesting
-# rubocop: disable Metrics/CyclomaticComplexity
-# rubocop: disable Metrics/PerceivedComplexity
-# rubocop: disable Style/IfInsideElse
+# rubocop: disable all
 
 module Enumerable
   def my_each
@@ -113,6 +107,8 @@ module Enumerable
     array = array.to_a if array.class == Range
     array = array.values if array.class == Hash
 
+    return true if array.empty?
+
     if !block_given? && !arg
       res = array.my_all? do |x|
         !(x != false and !x.nil?)
@@ -146,6 +142,8 @@ module Enumerable
 
     return array.length if !block_given? && !arg
 
+    return 0 if array.empty?
+
     count = 0
 
     for i in 0...array.length
@@ -153,7 +151,7 @@ module Enumerable
         if arg.is_a? Module or arg.is_a? Class
           count += 1 if array[i].is_a?(arg)
         elsif arg.class == Regexp
-          count += 1 if array[i].match(arg).nil?
+          count += 1 unless array[i].match(arg).nil?
         else count += 1 unless array[i] != arg
         end
       else count += 1 if yield array[i]
