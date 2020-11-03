@@ -1,10 +1,4 @@
-# rubocop: disable Metrics/ModuleLength
-# rubocop: disable Metrics/MethodLength
-# rubocop: disable Style/For
-# rubocop: disable Metrics/BlockNesting
-# rubocop: disable Metrics/CyclomaticComplexity
-# rubocop: disable Metrics/PerceivedComplexity
-# rubocop: disable Style/IfInsideElse
+# rubocop: disable all
 
 module Enumerable
   def my_each
